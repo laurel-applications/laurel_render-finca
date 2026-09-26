@@ -1,0 +1,14 @@
+services:
+  app:
+    build: .
+    container_name: casa-bareque
+    restart: unless-stopped
+    ports:
+      # <host_port>:<container_port>
+      # Default: expose container :80 on host :80 (requires root or capability mapping).
+      - "80:80"
+    # To use a different host port without touching the Dockerfile, override PORT:
+    # environment:
+    #   - PORT=8080
+    # ports:
+    #   - "8080:8080"
