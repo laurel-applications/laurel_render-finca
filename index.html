@@ -21,12 +21,27 @@
       max-width: 260px;
       line-height: 1.5;
     }
+    a.cost-link {
+      pointer-events: auto;
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 10px;
+      background: #ffeb3b;
+      color: #000;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 11px;
+    }
+    a.cost-link:hover { background: #fff34d; }
   </style>
 </head>
 <body>
   <div id="info">
     <strong>3D House — Setup</strong><br />
     Drag: rotate · Right-click: pan · Wheel: zoom
+    <br />
+    <a class="cost-link" href="costos.html">Ver costos (COP) →</a>
   </div>
 
   <!-- Importmap: maps "three" to the ES module CDN build. -->

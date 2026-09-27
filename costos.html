@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casa Bareque — Costos Aproximados por Producto</title>
+  <style>
+    :root {
+      --bg: #1a1d23;
+      --panel: #252932;
+      --panel-2: #2e333d;
+      --text: #e8e8e8;
+      --muted: #9aa0aa;
+      --accent: #ffeb3b;
+      --border: #3a3f4a;
+      --green: #6ad36a;
+      --red: #ef6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 18px;
+    }
+    header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 700; }
+    header .sub { color: var(--muted); font-size: 13px; }
+    header .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      background: var(--accent);
+      color: #000;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-right: 8px;
+    }
+    section.block {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    section.block > h2 {
+      margin: 0;
+      padding: 14px 20px;
+      font-size: 15px;
+      background: var(--panel-2);
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    thead th {
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      font-weight: 700;
+    }
+    tbody tr:hover { background: rgba(255,235,59,0.04); }
+    tbody tr:last-child td { border-bottom: none; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.cost, th.cost { text-align: right; color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+    td.cat { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
+    tfoot th { background: var(--panel-2); font-size: 13px; }
+    tfoot td { background: var(--panel-2); font-size: 14px; font-weight: 700; }
+    .grand td, .grand th { color: var(--accent); font-size: 16px; }
+    .small { color: var(--muted); font-size: 11px; }
+    .badge {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .badge.wood { background: #6f4a1f; color: #fff; }
+    .badge.tile { background: #4a4a4a; color: #fff; }
+    .badge.hardware { background: #555; color: #fff; }
+    .badge.labor { background: #2d5a8a; color: #fff; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      padding: 0;
+    }
+    .summary-grid > div {
+      padding: 16px 20px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+    .summary-grid > div:last-child { border-right: none; }
+    .summary-grid .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .summary-grid .value { font-size: 22px; font-weight: 700; color: var(--accent); margin-top: 4px; font-variant-numeric: tabular-nums; }
+    .summary-grid .sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+    footer {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 18px;
+      padding: 16px;
+      border-top: 1px solid var(--border);
+      border-radius: 6px;
+      line-height: 1.6;
+    }
+    footer b { color: var(--text); }
+    .neg { color: var(--red); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1><span class="pill">COP</span>Casa Bareque — Costos Aproximados por Producto</h1>
+    <div class="sub">Puerto Lleras, Meta · Estructura 9.50 × 5.25 m · Techo de zinc corrugado · 28 tejas</div>
+    <div style="margin-top: 12px;">
+      <a href="index.html" style="display:inline-block; padding:6px 12px; background:#ffeb3b; color:#000; text-decoration:none; border-radius:4px; font-weight:600; font-size:12px;">← Ver render 3D</a>
+    </div>
+  </header>
+
+  <!-- Resumen -->
+  <section class="block">
+    <h2>Resumen <span style="font-size:11px; opacity:0.6; font-weight:400;">(sin madera — solo referencia en sección 1)</span></h2>
+    <div class="summary-grid">
+      <div>
+        <div class="label">Materiales</div>
+        <div class="value">$1.968.500</div>
+        <div class="sub">cubierta + herrajes · ≈ 41 %</div>
+      </div>
+      <div>
+        <div class="label">Mano de obra</div>
+        <div class="value">$1.400.000</div>
+        <div class="sub">solo maestro · ≈ 29 %</div>
+      </div>
+      <div>
+        <div class="label">Transporte + menores</div>
+        <div class="value">$500.000</div>
+        <div class="sub">≈ 10 %</div>
+      </div>
+      <div>
+        <div class="label">Imprevistos (10 %)</div>
+        <div class="value">$336.850</div>
+        <div class="sub">sobre materiales + M.O.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Madera -->
+  <section class="block">
+    <h2>1. Madera estructural · <span class="badge wood">Madera</span> <span style="font-size:11px; opacity:0.6; font-weight:400;">(no incluida en el total — referencia de cantidades)</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Sección</th>
+          <th class="num">Cant.</th>
+          <th class="num">Largo unit.</th>
+          <th class="num">Total ml</th>
+          <th class="num">Precio/ml</th>
+          <th class="cost">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Columnas perimetrales</td>
+          <td>15 × 15 cm</td>
+          <td class="num">8</td>
+          <td class="num">1,95 m</td>
+          <td class="num">15,6 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Columnas centrales (apoyo cumbrera)</td>
+          <td>15 × 15 cm</td>
+          <td class="num">4</td>
+          <td class="num">2,75 m</td>
+          <td class="num">11,0 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Pares (top chord cercha)</td>
+          <td>10 × 20 cm</td>
+          <td class="num">12</td>
+          <td class="num">3,04 m</td>
+          <td class="num">36,5 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Tirantes (bottom chord)</td>
+          <td>10 × 20 cm</td>
+          <td class="num">6</td>
+          <td class="num">5,25 m</td>
+          <td class="num">31,5 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Pendolones (king post)</td>
+          <td>10 × 10 cm</td>
+          <td class="num">6</td>
+          <td class="num">0,89 m</td>
+          <td class="num">5,3 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Diagonales (Howe)</td>
+          <td>10 × 10 cm</td>
+          <td class="num">12</td>
+          <td class="num">3,04 m</td>
+          <td class="num">36,5 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Vigas soleras (wall plates)</td>
+          <td>10 × 20 cm</td>
+          <td class="num">2</td>
+          <td class="num">9,50 m</td>
+          <td class="num">19,0 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>VIG-A central (caballete)</td>
+          <td>10 × 20 cm</td>
+          <td class="num">1</td>
+          <td class="num">9,50 m</td>
+          <td class="num">9,5 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>VIG-A aleros (×2)</td>
+          <td>10 × 20 cm</td>
+          <td class="num">2</td>
+          <td class="num">9,50 m</td>
+          <td class="num">19,0 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+        <tr>
+          <td>Costaneras (roof battens)</td>
+          <td>5 × 10 cm</td>
+          <td class="num">5</td>
+          <td class="num">10,06 m</td>
+          <td class="num">50,3 m</td>
+          <td class="num">—</td>
+          <td class="cost" style="opacity:0.4;">no incluida</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="6" style="text-align: right;">Total madera (234 ml · 3,58 m³) — referencia</th>
+          <th class="cost" style="opacity:0.4;">$5.307.500 (no incl.)</th>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- Cubierta -->
+  <section class="block">
+    <h2>2. Cubierta · <span class="badge tile">Zinc</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Especificación</th>
+          <th class="num">Cant.</th>
+          <th class="num">Precio unit.</th>
+          <th class="cost">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tejas de zinc corrugado cal. 30</td>
+          <td>0,80 × 3,65 m · 8 ondas</td>
+          <td class="num">28</td>
+          <td class="num">$55.000</td>
+          <td class="cost">$1.540.000</td>
+        </tr>
+        <tr>
+          <td>Tornillos goloso zinc (autoperforantes)</td>
+          <td>1/4" × 1" con arandela EPDM</td>
+          <td class="num">~250</td>
+          <td class="num">$450</td>
+          <td class="cost">$112.500</td>
+        </tr>
+        <tr>
+          <td>Caballete / lima hojalata (cumbrera)</td>
+          <td>Desarrollo 40 cm · 9,5 m</td>
+          <td class="num">1</td>
+          <td class="num">$95.000</td>
+          <td class="cost">$95.000</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4" style="text-align: right;">Total cubierta</th>
+          <th class="cost">$1.747.500</th>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- Herrajes -->
+  <section class="block">
+    <h2>3. Herrajes y consumibles · <span class="badge hardware">Hardware</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th class="num">Cant.</th>
+          <th class="num">Precio unit.</th>
+          <th class="cost">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Clavos acero galvanizado 3"</td>
+          <td class="num">2 kg</td>
+          <td class="num">$22.000/kg</td>
+          <td class="cost">$44.000</td>
+        </tr>
+        <tr>
+          <td>Grapas / conectores metálicos para uniones</td>
+          <td class="num">30</td>
+          <td class="num">$1.500</td>
+          <td class="cost">$45.000</td>
+        </tr>
+        <tr>
+          <td>Inmunizante para madera (1 galón cubre ~30 m²)</td>
+          <td class="num">2 gal</td>
+          <td class="num">$48.000</td>
+          <td class="cost">$96.000</td>
+        </tr>
+        <tr>
+          <td>Cinta sellante para juntas zinc (rollo 10 m)</td>
+          <td class="num">2</td>
+          <td class="num">$18.000</td>
+          <td class="cost">$36.000</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="3" style="text-align: right;">Total herrajes</th>
+          <th class="cost">$221.000</th>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- Mano de obra -->
+  <section class="block">
+    <h2>4. Mano de obra · <span class="badge labor">M.O.</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rol</th>
+          <th class="num">Cant.</th>
+          <th class="num">Días</th>
+          <th class="num">Tarifa/día</th>
+          <th class="cost">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Maestro de obra (el "tío")</td>
+          <td class="num">1</td>
+          <td class="num">20</td>
+          <td class="num">$70.000</td>
+          <td class="cost">$1.400.000</td>
+        </tr>
+        <tr>
+          <td>Carpinteros (ayuda sin pago)</td>
+          <td class="num">2</td>
+          <td class="num">20</td>
+          <td class="num">$0</td>
+          <td class="cost" style="opacity:0.4;">comunitaria</td>
+        </tr>
+        <tr>
+          <td>Ayudantes (ayuda sin pago)</td>
+          <td class="num">2</td>
+          <td class="num">20</td>
+          <td class="num">$0</td>
+          <td class="cost" style="opacity:0.4;">familiar</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4" style="text-align: right;">Total mano de obra</th>
+          <th class="cost">$1.400.000</th>
+        </tr>
+        <tfoot>
+      </tfoot>
+    </table>
+    <p class="small" style="padding: 8px 14px; opacity: 0.7;">
+      Los carpinteros y ayudantes no perciben remuneración en dinero — es mano de obra familiar / comunitaria.
+      El único costo en mano de obra es el maestro ("tío").
+    </p>
+  </section>
+
+  <!-- Otros -->
+  <section class="block">
+    <h2>5. Otros</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th class="cost">Costo aprox.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Transporte de materiales (sitio ↔ almacén)</td>
+          <td class="cost">$400.000</td>
+        </tr>
+        <tr>
+          <td>Consumibles menores (cintas, lija, etc.)</td>
+          <td class="cost">$100.000</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th style="text-align: right;">Total otros</th>
+          <th class="cost">$500.000</th>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- Total -->
+  <section class="block">
+    <h2>6. Resumen final</h2>
+    <table>
+      <tbody>
+        <tr><td>Madera estructural (234 ml · 3,58 m³)</td><td class="cost" style="opacity:0.4;">no incluida (referencia)</td></tr>
+        <tr><td>Cubierta de zinc (28 tejas + tornillos + caballete)</td><td class="cost">$1.747.500</td></tr>
+        <tr><td>Herrajes y consumibles</td><td class="cost">$221.000</td></tr>
+        <tr><td>Subtotal materiales</td><td class="cost" style="font-weight: 700;">$1.968.500</td></tr>
+        <tr><td>Mano de obra (1 maestro · 20 días · ayuda familiar sin pago)</td><td class="cost">$1.400.000</td></tr>
+        <tr><td>Otros (transporte + menores)</td><td class="cost">$500.000</td></tr>
+        <tr><td>Imprevistos (10 % sobre mat + M.O.)</td><td class="cost">$336.850</td></tr>
+      </tbody>
+      <tfoot class="grand">
+        <tr>
+          <th style="font-size: 16px;">TOTAL ESTIMADO <span style="font-size:11px; opacity:0.6; font-weight:400;">(sin madera)</span></th>
+          <th class="cost" style="font-size: 20px;">$4.205.350 COP</th>
+        </tr>
+        <tr>
+          <th style="font-size: 13px; font-weight: normal; color: var(--muted);">≈ en USD (TRM ~$4.200)</th>
+          <th class="cost" style="font-size: 15px; font-weight: normal;">~$1.001 USD</th>
+        </tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- Extras -->
+  <section class="block">
+    <h2>7. Conceptos NO incluidos (opcionales)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th class="cost">Costo aprox.</th>
+          <th class="small">Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Dados de cimentación (16 × 40×40×60 cm)</td><td class="cost">$400.000</td><td class="small">0,77 m³ concreto + excavación</td></tr>
+        <tr><td>Canoas y bajantes pluviales</td><td class="cost">$800.000</td><td class="small">PVC o zinc, ~12 m totales</td></tr>
+        <tr><td>Pintura / inmunizante adicional</td><td class="cost">$1.200.000</td><td class="small">Lasur exterior, 2 manos</td></tr>
+        <tr><td>Herramientas y equipos (alquiler/compra)</td><td class="cost">$500.000</td><td class="small">Sierra circular, taladro, etc.</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><th colspan="1" style="text-align: right;">Si añadís todo</th><th class="cost">+$2.900.000</th><th class="small">≈ +$690 USD</th></tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <footer>
+    <b>Advertencias importantes:</b><br>
+    1. <b>Especies de madera:</b> usé precios promedio de pino/eucalipto. Si usás maderas duras (nogal, cedro, guayacán), el costo puede ser 2-3× mayor.<br>
+    2. <b>Calibre del zinc:</b> calibre 30 (0,3 mm) es el mínimo. Para zonas de lluvia fuerte, recomiendo calibre 28 (0,4 mm) — sube el costo ~30 %.<br>
+    3. <b>Precios 2025-2026:</b> la inflación de materiales en Colombia ha subido. Validá con cotizaciones reales en tu zona (Meta / Llanos).<br>
+    4. <b>No incluye:</b> permisos, conexiones de servicios públicos, ni impuestos.<br>
+    5. <b>Advertencia crítica:</b> estos precios son aproximados y orientativos. Confirmá siempre con tu proveedor local antes de tomar decisiones de compra.<br><br>
+    <span class="small">Página generada automáticamente — vinculada al modelo 3D de la Casa Bareque.</span>
+  </footer>
+
+</div>
+</body>
+</html>
