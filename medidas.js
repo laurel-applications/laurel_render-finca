@@ -12,11 +12,16 @@
 
 export const M = Object.freeze({
   // --- Overall envelope ----------------------------------------------------
-  largo:        9.30,   // X — long axis
-  ancho:        6.50,   // Z — short axis (roof span)
+  largo:        9.50,   // X — long axis (shortened 0.5 m so the overhanging tiles
+                          // cover more of the gable truss without changing the
+                          // tile count)
+  ancho:        5.25,   // Z — short axis (roof span) — corrected from 6.50
   altoAlero:    1.95,   // Y — wall / eave height
-  altoCumbrera: 2.85,   // Y — ridge height
-  alero:        0.50,   // eaves overhang on the long sides (each side)
+  altoCumbrera: 2.75,   // Y — ridge height (lowered from 2.85 so a 3.65 m tile
+                          // covers the slope with ~3 cm margin — angle drops
+                          // from 15.5° to ~13.8°)
+  alero:        0.28,   // eaves overhang on the long sides — matches the tile alero
+                          // per the roof diagram (Casa Bareque roof sheet)
 
   // --- Piece cross-sections (width × thickness) ----------------------------
   // All structural wood pieces share 10×20cm; costaneras are thinner.
@@ -30,6 +35,21 @@ export const M = Object.freeze({
   // (kept for reference; currently NOT rendered — user removed them)
   dadoA: 0.40,
   dadoH: 0.60,
+
+  // --- Roof tiles (tejas de zinc corrugado) --------------------------------
+  // Real specifications from the "Diagrama de Cubierta" image.
+  tejaAncho:    0.80,   // total width per tile (incl. lateral overlap edge)
+  tejaTraslapo: 0.10,   // lateral overlap between adjacent tiles (1 crest + half)
+  tejaUtil:     0.70,   // effective width after overlap = tejaAncho - tejaTraslapo
+  tejaLargo:    3.65,   // total tile length, measured along the slope (catalog spec).
+                          // With the current structure (slope ≈ 3.04 m) the tile
+                          // is 0.61 m longer than the slope — it overhangs the
+                          // alero and the ridge by ~30 cm on each end.
+  tejaOndas:    8,      // corrugations per tile (crest pitch ≈ 10 cm)
+  tejaAmplitud: 0.018,  // corrugation peak-to-mean amplitude (1.8 cm)
+  // Gable overhang — tiles extend past X=0 and X=largo by this amount so
+  // the truss par at the first/last truss is covered (no exposed wood at ends).
+  tejaAleroGable: 0.00,  // gable overhang — tiles end exactly at the gable edges
 
   // --- Counts & spacing ----------------------------------------------------
   columnasPorLadoLargo: 4,  // 2 corners + 2 intermediates per long side
